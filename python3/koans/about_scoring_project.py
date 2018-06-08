@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from runner.koan import *
-
+from functools import reduce
 # Greed is a dice game where you roll up to five dice to accumulate
 # points.  The following "score" function will be used calculate the
 # score of a single roll of the dice.
@@ -34,7 +34,16 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    if not isinstance(dice,list):raise RuntimeError("wrong param type")
+    cnts = [ 0 for i in range(0,6)]
+    pts = [[1000,100],[200,0],[300,0],[400,0],[500,50],[600,0]]
+    for item in dice:
+        cnts[item-1]+=1
+    sum=0
+    for i,v in enumerate(cnts):
+        if v>=3: sum+=pts[i][0]+(v-3)*pts[i][1]
+        else: sum+=v*pts[i][1]
+    return sum
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):

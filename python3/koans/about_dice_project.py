@@ -16,6 +16,8 @@ class DiceSet:
     def roll(self, n):
         # Needs implementing!
         # Tip: random.randint(min, max) can be used to generate random numbers
+        if not isinstance(n,int): raise RuntimeError("n should be int")
+        self._values=[random.randint(1,6) for i in range(0,n)]
         pass
 
 class AboutDiceProject(Koan):
